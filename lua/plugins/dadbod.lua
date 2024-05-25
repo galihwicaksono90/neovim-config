@@ -1,6 +1,12 @@
 return {
   'tpope/vim-dadbod',
-  'kristijanhusak/vim-dadbod-ui',
+  {
+    'kristijanhusak/vim-dadbod-ui',
+    init = function()
+      -- taggle dadbod-ui
+      vim.keymap.set('n', '<leader>td', '<cmd>DBUIToggle<CR>')
+    end,
+  },
   'kristijanhusak/vim-dadbod-completion',
   {
     'tpope/vim-dadbod',

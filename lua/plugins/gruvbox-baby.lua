@@ -1,3 +1,7 @@
+if true then
+  return {}
+end
+
 return {
   'luisiacc/gruvbox-baby',
   lazy = true,

@@ -11,14 +11,18 @@ return {
   },
   cmd = 'Neotree',
   keys = {
-    { '\\', ':Neotree toggle<CR>', { desc = 'NeoTree toggle' } },
+    { '<leader>e', ':Neotree toggle<CR>', { desc = 'NeoTree toggle' } },
+    { '<leader>o', ':Neotree focus<CR>', { desc = 'NeoTree focus' } },
+    -- { '\\', ':Neotree toggle<CR>', { desc = 'NeoTree toggle' } },
   },
   opts = {
     filesystem = {
       window = {
         mappings = {
           ['\\'] = 'close_window',
+          ['<space>'] = '',
         },
+        width = 30,
       },
       hijack_netrw_behavior = 'open_current',
       close_if_last_window = true,

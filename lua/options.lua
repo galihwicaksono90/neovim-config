@@ -1,10 +1,6 @@
---  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
 -- disable netrw
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+-- vim.g.loaded_netrw = 1
+-- vim.g.loaded_netrwPlugin = 1
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
@@ -82,3 +78,21 @@ vim.opt.scrolloff = 10
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
+
+-- enable 24-bit RGB color in the TUI
+vim.opt.termguicolors = true
+
+-- disable wrap line
+vim.opt.wrap = false
+
+-- wrap lines at 'breakat'
+vim.opt.linebreak = true
+
+-- disable `~` on nonexistent lines
+vim.opt.fillchars = { eob = ' ' }
+
+-- hide command line unless needed
+vim.opt.cmdheight = 0
+
+-- set colorscheme
+vim.cmd.colorscheme 'gruvbox-material'

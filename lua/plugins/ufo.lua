@@ -1,20 +1,41 @@
 if true then
   return {}
-end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
-
+end
 return {
   'kevinhwang91/nvim-ufo',
-  dependencies = 'kevinhwang91/promise-async',
+  dependencies = { 'kevinhwang91/promise-async' },
+  event = 'BufRead',
+  keys = {
+    {
+      'zR',
+      function()
+        require('ufo').openAllFolds()
+      end,
+    },
+    {
+      'zM',
+      function()
+        require('ufo').closeAllFolds()
+      end,
+    },
+    {
+      'K',
+      function()
+        local winid = require('ufo').peekFoldedLinesUnderCursor()
+        if not winid then
+          vim.lsp.buf.hover()
+        end
+      end,
+    },
+  },
   config = function()
-    require('ufo').setup()
-  end,
-  init = function()
-    vim.o.foldcolumn = '1' -- '0' is not bad
-    vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+    vim.o.foldcolumn = '1'
+    vim.o.foldlevel = 99
     vim.o.foldlevelstart = 99
     vim.o.foldenable = true
-
-    vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
-    vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+    vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+    require('ufo').setup {
+      close_fold_kinds_for_ft = { 'imports' },
+    }
   end,
 }

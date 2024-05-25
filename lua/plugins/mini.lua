@@ -33,5 +33,22 @@ return { -- Collection of various small independent plugins/modules
 
     -- ... and there is more!
     --  Check out: https://github.com/echasnovski/mini.nvim
+
+    -- mini diff
+    -- require('mini.diff').setup()
+
+    -- Mini. bufremove
+    local bufremove = require 'mini.bufremove'
+    bufremove.setup()
+    -- set keymaps for mini.bufremove
+    vim.keymap.set('n', '<leader>bc', function()
+      bufremove.delete()
+    end, { desc = '[B]uffer [C]lose' })
+    vim.keymap.set('n', '<leader>bC', function()
+      bufremove.wipeout()
+    end, { desc = '[B]uffer close [A]ll' })
+    vim.keymap.set('n', '<leader>bh', function()
+      bufremove.unshow()
+    end, { desc = '[B]uffer [H]ide' })
   end,
 }
