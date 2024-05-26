@@ -1,3 +1,6 @@
+if true then
+  return {}
+end
 -- Here is a more advanced example where we pass configuration
 -- options to `gitsigns.nvim`. This is equivalent to the following Lua:
 --    require('gitsigns').setup({ ... })

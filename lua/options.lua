@@ -38,7 +38,7 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 -- Keep signcolumn on by default
-vim.opt.signcolumn = 'yes'
+vim.opt.signcolumn = 'auto'
 
 -- Decrease update time
 vim.opt.updatetime = 250
@@ -68,7 +68,7 @@ vim.opt.softtabstop = 2
 vim.opt.inccommand = 'split'
 
 -- Show which line your cursor is on
-vim.opt.cursorline = true
+vim.opt.cursorline = false
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
@@ -88,11 +88,18 @@ vim.opt.wrap = false
 -- wrap lines at 'breakat'
 vim.opt.linebreak = true
 
--- disable `~` on nonexistent lines
+-- -- disable `~` on nonexistent lines
 vim.opt.fillchars = { eob = ' ' }
 
 -- hide command line unless needed
-vim.opt.cmdheight = 0
+vim.opt.cmdheight = 1
 
 -- set colorscheme
 vim.cmd.colorscheme 'gruvbox-material'
+
+-- set diagnostic icons
+local signs = { Error = '󰅚 ', Warn = '󰀪 ', Hint = '󰌶 ', Info = ' ' }
+for type, icon in pairs(signs) do
+  local hl = 'DiagnosticSign' .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
