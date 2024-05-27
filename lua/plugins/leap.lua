@@ -16,17 +16,13 @@ return {
     opts = { labeled_modes = 'nx' },
     dependencies = {
       'ggandor/leap.nvim',
-      keys = {
-        { 's', mode = { 'n', 'o' }, desc = 'Leap forward to' },
-        { 'S', mode = { 'n', 'o' }, desc = 'Leap backward to' },
-        { 'gs', mode = { 'n' }, desc = 'Leap from windows' },
-      },
+      event = 'VeryLazy',
       config = function(_, opts)
         local leap = require 'leap'
-        for k, v in pairs(opts) do
-          leap.opts[k] = v
-        end
-        leap.add_default_mappings(true)
+        -- for k, v in pairs(opts) do
+        --   leap.opts[k] = v
+        -- end
+        -- leap.add_default_mappings(true)
 
         leap.opts.case_sensitive = false
 
@@ -49,8 +45,19 @@ return {
           bold = true,
           nocombine = true,
         })
+        vim.api.nvim_set_hl(0, 'Cursor', { reverse = false })
+
+        -- vim.cmd.h('Cursor', 'blend=100')
+        -- vim.opt.guicursor:append { 'a:Cursor/lCursor' }
         -- Try it without this setting first, you might find you don't even miss it.
         -- require('leap').opts.highlight_unlabeled_phase_one_targets = true
+        --
+      end,
+      init = function()
+        vim.keymap.set('n', '<leap>', '<Plug>(leap)')
+        -- vim.keymap.set({ 'n', 'x', 'o' }, 'gs', '<Plug>(leap-forward)')
+        -- vim.keymap.set({ 'n', 'x', 'o' }, 'gS', '<Plug>(leap-backward)')
+        -- vim.keymap.set({ 'n', 'x', 'o' }, 'gw', '<Plug>(leap-from-window)')
       end,
       dependencies = {
         'tpope/vim-repeat',

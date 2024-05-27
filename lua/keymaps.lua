@@ -4,13 +4,26 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
 -- vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
-vim.keymap.set('n', '<leader>ld', vim.diagnostic.open_float, { desc = 'LSP: Ssow diagnostic [E]rror messages' })
+vim.keymap.set('n', '<leader>ld', vim.diagnostic.open_float, { desc = 'LSP: Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>lq', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- save file
 vim.keymap.set('n', '<leader>w', '<Cmd>w<CR>', { desc = 'Save file' })
+
+-- quit
 vim.keymap.set('n', '<leader>q', '<Cmd>confirm q<CR>', { desc = 'Quit window' })
 vim.keymap.set('n', '<leader>Q', '<Cmd>confirm qall<CR>', { desc = 'Exit Neovim' })
+
+-- buffers
+vim.keymap.set('n', '<leader>c', function()
+  require('config.buffer').close()
+end, { desc = 'Close current buffer' })
+vim.keymap.set('n', '<leader>bc', function()
+  require('config.buffer').close_all(true)
+end, { desc = 'Close all buffers except for current' })
+vim.keymap.set('n', '<leader>bC', function()
+  require('config.buffer').close_all(false)
+end, { desc = 'Close all buffers' })
 
 -- misc
 vim.keymap.set('n', 'J', 'mzJ`z')

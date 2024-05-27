@@ -62,9 +62,9 @@ return { -- Fuzzy Finder (files, lsp, etc)
         -- prompt_prefix = get_icon("Selected", 1),
         -- selection_caret = get_icon("Selected", 1),
         path_display = { 'truncate' },
-        sorting_strategy = 'ascending',
+        -- sorting_strategy = 'ascending',
         layout_config = {
-          horizontal = { prompt_position = 'top', preview_width = 0.55 },
+          horizontal = { prompt_position = 'bottom', preview_width = 0.55 },
           vertical = { mirror = false },
           width = 0.87,
           height = 0.80,
@@ -72,6 +72,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
         },
         mappings = {
           n = { q = require('telescope.actions').close },
+          i = { ['<c-enter>'] = 'to_fuzzy_refine' },
         },
         -- pickers = {}
       },
@@ -110,14 +111,12 @@ return { -- Fuzzy Finder (files, lsp, etc)
 
     vim.keymap.set('n', '<leader>fw', function()
       builtin.live_grep {
-        grep_open_files = true,
         prompt_title = 'Live Grep',
       }
     end, { desc = '[F]ind [w]ord in Open Files' })
 
     vim.keymap.set('n', '<leader>fW', function()
       builtin.live_grep {
-        grep_open_files = true,
         prompt_title = 'Live Grep in All Files',
         additional_args = function(args)
           return vim.list_extend(args, { '--hidden', '--no-ignore' })

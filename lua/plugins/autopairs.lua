@@ -1,3 +1,6 @@
+if true then
+  return {}
+end
 -- autopairs
 -- https://github.com/windwp/nvim-autopairs
 

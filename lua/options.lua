@@ -38,7 +38,7 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 -- Keep signcolumn on by default
-vim.opt.signcolumn = 'auto'
+vim.opt.signcolumn = 'number'
 
 -- Decrease update time
 vim.opt.updatetime = 250
@@ -54,8 +54,8 @@ vim.opt.splitbelow = true
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
-vim.opt.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+-- vim.opt.list = true
+-- vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 -- set tab width
 vim.opt.smarttab = true
@@ -68,7 +68,7 @@ vim.opt.softtabstop = 2
 vim.opt.inccommand = 'split'
 
 -- Show which line your cursor is on
-vim.opt.cursorline = false
+vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
