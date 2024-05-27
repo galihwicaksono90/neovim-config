@@ -12,7 +12,8 @@ return {
     -- { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
   },
   config = function()
-    vim.api.nvim_set_hl(0, 'FlashSearch', { bg = 'red', fg = 'blue' })
-    vim.api.nvim_set_hl(0, 'FlashCursor', { bg = 'purple', fg = 'green' })
+    vim.api.nvim_set_hl(0, 'FlashLabel', { link = 'WarningMsg' })
+    vim.api.nvim_set_hl(0, 'FlashMatch', { link = 'Comment' })
+    vim.api.nvim_set_hl(0, 'FlashCurrent', { link = 'DiagnosticUnderlineOk' })
   end,
 }

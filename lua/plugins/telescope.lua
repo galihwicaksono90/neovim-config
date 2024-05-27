@@ -50,14 +50,11 @@ return { -- Fuzzy Finder (files, lsp, etc)
       --  All the info you're looking for is in `:help telescope.setup()`
       --
       defaults = {
-        -- borderchars = {
-        --   prompt = { '─', ' ', ' ', ' ', '─', '─', ' ', ' ' },
-        --   results = { ' ' },
-        --   preview = { ' ' },
-        -- },
-        --   mappings = {
-        --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-        --   },
+        borderchars = {
+          prompt = { '─', ' ', ' ', ' ', '─', '─', ' ', ' ' },
+          results = { ' ' },
+          preview = { ' ' },
+        },
         -- git_worktrees = require("astrocore").config.git_worktrees,
         -- prompt_prefix = get_icon("Selected", 1),
         -- selection_caret = get_icon("Selected", 1),

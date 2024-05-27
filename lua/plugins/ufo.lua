@@ -4,51 +4,7 @@
 --
 return {
   'kevinhwang91/nvim-ufo',
-  dependencies = {
-    { 'kevinhwang91/promise-async' },
-    -- {
-    --   'luukvbaal/statuscol.nvim',
-    --   config = function()
-    --     local builtin = require 'statuscol.builtin'
-    --     require('statuscol').setup {
-    --       -- configuration goes here, for example:
-    --       relculright = true,
-    --       segments = {
-    --         { text = { builtin.foldfunc }, click = 'v:lua.ScFa' },
-    --         {
-    --           sign = { name = { 'Diagnostic' }, maxwidth = 2, auto = true },
-    --           click = 'v:lua.ScSa',
-    --         },
-    --         { text = { builtin.lnumfunc }, click = 'v:lua.ScLa' },
-    --         {
-    --           sign = { name = { '.*' }, maxwidth = 2, colwidth = 1, auto = true, wrap = true },
-    --           click = 'v:lua.ScSa',
-    --         },
-    --       },
-    --     }
-    --   end,
-    -- },
-    {
-      'luukvbaal/statuscol.nvim',
-      opts = function()
-        local builtin = require 'statuscol.builtin'
-        return {
-          setopt = true,
-          -- override the default list of segments with:
-          -- number-less fold indicator, then signs, then line number & separator
-          segments = {
-            { text = { builtin.foldfunc }, click = 'v:lua.ScFa' },
-            { text = { '%s' }, click = 'v:lua.ScSa' },
-            {
-              text = { builtin.lnumfunc, ' ' },
-              condition = { true, builtin.not_empty },
-              click = 'v:lua.ScLa',
-            },
-          },
-        }
-      end,
-    },
-  },
+  dependencies = { 'kevinhwang91/promise-async' },
   event = 'VeryLazy',
   opts = {
     -- INFO: Uncomment to use treeitter as fold provider, otherwise nvim lsp is used
@@ -79,11 +35,7 @@ return {
     vim.keymap.set('n', 'zr', require('ufo').openFoldsExceptKinds)
     vim.keymap.set('n', 'zp', function()
       require('ufo').peekFoldedLinesUnderCursor()
-      -- if not winid then
-      --   -- vim.lsp.buf.hover()
-      --   vim.cmd [[ Lspsaga hover_doc ]]
-      -- end
-    end)
+    end, { desc = 'Peek fold' })
   end,
 
   init = function()
