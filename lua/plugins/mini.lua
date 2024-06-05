@@ -19,20 +19,20 @@ return { -- Collection of various small independent plugins/modules
     -- mini bracket pairs
     require('mini.pairs').setup()
 
-    -- -- Simple and easy statusline.
-    -- --  You could remove this setup call if you don't like it,
-    -- --  and try some other statusline plugin
-    local statusline = require 'mini.statusline'
-    -- -- set use_icons to true if you have a Nerd Font
-    statusline.setup { use_icons = vim.g.have_nerd_font }
-    --
-    -- -- You can configure sections in the statusline by overriding their
-    -- -- default behavior. For example, here we set the section for
-    -- -- cursor location to LINE:COLUMN
-    ---@diagnostic disable-next-line: duplicate-set-field
-    statusline.section_location = function()
-      return '%2l:%-2v'
-    end
+    -- -- -- Simple and easy statusline.
+    -- -- --  You could remove this setup call if you don't like it,
+    -- -- --  and try some other statusline plugin
+    -- local statusline = require 'mini.statusline'
+    -- -- -- set use_icons to true if you have a Nerd Font
+    -- statusline.setup { use_icons = vim.g.have_nerd_font }
+    -- --
+    -- -- -- You can configure sections in the statusline by overriding their
+    -- -- -- default behavior. For example, here we set the section for
+    -- -- -- cursor location to LINE:COLUMN
+    -- ---@diagnostic disable-next-line: duplicate-set-field
+    -- statusline.section_location = function()
+    --   return '%2l:%-2v'
+    -- end
 
     -- mini diff
     -- require('mini.diff').setup()
@@ -43,12 +43,12 @@ return { -- Collection of various small independent plugins/modules
     -- set keymaps for mini.bufremove
     vim.keymap.set('n', '<leader>bc', function()
       bufremove.delete()
-    end, { desc = '[B]uffer [C]lose' })
+    end, { desc = 'Close' })
     vim.keymap.set('n', '<leader>bC', function()
       bufremove.wipeout()
-    end, { desc = '[B]uffer close [A]ll' })
+    end, { desc = 'Close All' })
     vim.keymap.set('n', '<leader>bh', function()
       bufremove.unshow()
-    end, { desc = '[B]uffer [H]ide' })
+    end, { desc = 'Hide' })
   end,
 }
