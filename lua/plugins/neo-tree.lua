@@ -26,6 +26,7 @@ return {
       },
       hijack_netrw_behavior = 'open_current',
       close_if_last_window = true,
+      follow_current_file = true,
     },
   },
   init = function()

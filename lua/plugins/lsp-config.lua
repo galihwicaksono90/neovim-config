@@ -167,6 +167,37 @@ return { -- LSP Configuration & Plugins
       -- But for many setups, the LSP (`tsserver`) will work just fine
       -- tsserver = {},
       --
+      volar = {
+        init_options = {
+          vue = {
+            hybridMode = false,
+          },
+        },
+        settings = {
+          typescript = {
+            updateImportsOnFileMove = { enabled = 'always' },
+            inlayHints = {
+              parameterNames = { enabled = 'all' },
+              parameterTypes = { enabled = true },
+              variableTypes = { enabled = true },
+              propertyDeclarationTypes = { enabled = true },
+              functionLikeReturnTypes = { enabled = true },
+              enumMemberValues = { enabled = true },
+            },
+          },
+          javascript = {
+            updateImportsOnFileMove = { enabled = 'always' },
+            inlayHints = {
+              parameterNames = { enabled = 'literals' },
+              parameterTypes = { enabled = true },
+              variableTypes = { enabled = true },
+              propertyDeclarationTypes = { enabled = true },
+              functionLikeReturnTypes = { enabled = true },
+              enumMemberValues = { enabled = true },
+            },
+          },
+        },
+      },
 
       lua_ls = {
         -- cmd = {...},
