@@ -154,6 +154,9 @@ return { -- LSP Configuration & Plugins
     --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
     --  - settings (table): Override the default settings passed when initializing the server.
     --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
+
+    local mason_registry = require 'mason-registry'
+    local vue_language_server_path = mason_registry.get_package('vue-language-server'):get_install_path() .. '/node_modules/@vue/language-server'
     local servers = {
       -- clangd = {},
       -- gopls = {},
@@ -172,31 +175,39 @@ return { -- LSP Configuration & Plugins
           vue = {
             hybridMode = false,
           },
-        },
-        settings = {
-          typescript = {
-            updateImportsOnFileMove = { enabled = 'always' },
-            inlayHints = {
-              parameterNames = { enabled = 'all' },
-              parameterTypes = { enabled = true },
-              variableTypes = { enabled = true },
-              propertyDeclarationTypes = { enabled = true },
-              functionLikeReturnTypes = { enabled = true },
-              enumMemberValues = { enabled = true },
-            },
-          },
-          javascript = {
-            updateImportsOnFileMove = { enabled = 'always' },
-            inlayHints = {
-              parameterNames = { enabled = 'literals' },
-              parameterTypes = { enabled = true },
-              variableTypes = { enabled = true },
-              propertyDeclarationTypes = { enabled = true },
-              functionLikeReturnTypes = { enabled = true },
-              enumMemberValues = { enabled = true },
+          plugins = {
+            {
+              name = '@vue/typescript-plugin',
+              location = vue_language_server_path,
+              languages = { 'vue' },
             },
           },
         },
+        -- settings = {
+        --   typescript = {
+        --     updateImportsOnFileMove = { enabled = 'always' },
+        --     inlayHints = {
+        --       parameterNames = { enabled = 'all' },
+        --       parameterTypes = { enabled = true },
+        --       variableTypes = { enabled = true },
+        --       propertyDeclarationTypes = { enabled = true },
+        --       functionLikeReturnTypes = { enabled = true },
+        --       enumMemberValues = { enabled = true },
+        --     },
+        --   },
+        --   javascript = {
+        --     updateImportsOnFileMove = { enabled = 'always' },
+        --     inlayHints = {
+        --       parameterNames = { enabled = 'literals' },
+        --       parameterTypes = { enabled = true },
+        --       variableTypes = { enabled = true },
+        --       propertyDeclarationTypes = { enabled = true },
+        --       functionLikeReturnTypes = { enabled = true },
+        --       enumMemberValues = { enabled = true },
+        --     },
+        --   },
+        -- },
+        filetypes = { 'vue' },
       },
 
       lua_ls = {
@@ -230,7 +241,7 @@ return { -- LSP Configuration & Plugins
       'stylua', -- Used to format Lua code
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
-
+    local home = os.getenv 'HOME'
     require('mason-lspconfig').setup {
       handlers = {
         function(server_name)
@@ -238,6 +249,7 @@ return { -- LSP Configuration & Plugins
           -- This handles overriding only values explicitly passed
           -- by the server configuration above. Useful when disabling
           -- certain features of an LSP (for example, turning off formatting for tsserver)
+          --
           server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
           require('lspconfig')[server_name].setup(server)
         end,
