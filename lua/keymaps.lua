@@ -25,6 +25,10 @@ vim.keymap.set('n', '<leader>bC', function()
   require('config.buffer').close_all(false)
 end, { desc = 'Close all buffers' })
 
+-- buffers
+vim.keymap.set('n', '<S-l>', '<Cmd>bn<CR>')
+vim.keymap.set('n', '<S-h>', '<Cmd>bp<CR>')
+
 -- misc
 vim.keymap.set('n', 'J', 'mzJ`z')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')

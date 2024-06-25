@@ -45,33 +45,41 @@ return { -- Fuzzy Finder (files, lsp, etc)
     -- [[ Configure Telescope ]]
     -- See `:help telescope` and `:help telescope.setup()`
     --
+    --
+    local actions = require 'telescope.actions'
     require('telescope').setup {
       -- You can put your default mappings / updates / etc. in here
       --  All the info you're looking for is in `:help telescope.setup()`
       --
       defaults = {
         borderchars = {
-          prompt = { '─', ' ', ' ', ' ', '─', '─', ' ', ' ' },
-          results = { ' ' },
-          preview = { ' ' },
+          prompt = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
+          results = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
+          preview = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
         },
-        -- git_worktrees = require("astrocore").config.git_worktrees,
-        -- prompt_prefix = get_icon("Selected", 1),
-        -- selection_caret = get_icon("Selected", 1),
         path_display = { 'truncate' },
-        -- sorting_strategy = 'ascending',
+        sorting_strategy = 'ascending',
         layout_config = {
-          horizontal = { prompt_position = 'bottom', preview_width = 0.55 },
+          horizontal = { prompt_position = 'top', preview_width = 0.55 },
           vertical = { mirror = false },
           width = 0.87,
           height = 0.80,
           preview_cutoff = 120,
         },
         mappings = {
-          n = { q = require('telescope.actions').close },
-          i = { ['<c-enter>'] = 'to_fuzzy_refine' },
+          n = { q = actions.close },
+          i = {
+            ['<c-enter>'] = 'to_fuzzy_refine',
+            -- ['<C-N>'] = actions.cycle_history_next,
+            -- ['<C-P>'] = actions.cycle_history_prev,
+            -- ['<C-J>'] = actions.move_selection_next,
+            -- ['<C-K>'] = actions.move_selection_previous,
+            ['<C-J>'] = actions.cycle_history_next,
+            ['<C-K>'] = actions.cycle_history_prev,
+            ['<C-N>'] = actions.move_selection_next,
+            ['<C-P>'] = actions.move_selection_previous,
+          },
         },
-        -- pickers = {}
       },
       extensions = {
         ['ui-select'] = {
@@ -97,7 +105,9 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = 'Diagnostics' })
     vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = 'Resume' })
     vim.keymap.set('n', '<leader>fo', builtin.oldfiles, { desc = 'Recent Files ("." for repeat)' })
-    vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = 'Find existing buffers' })
+    vim.keymap.set('n', '<leader><leader>', function()
+      builtin.buffers { sorting_mru = true, ignore_current_buffer = true }
+    end, { desc = 'Find existing buffers' })
 
     vim.keymap.set('n', '<leader>f.', function()
       builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
@@ -110,7 +120,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
       builtin.live_grep {
         prompt_title = 'Live Grep',
       }
-    end, { desc = 'Find word in Open Files' })
+    end, { desc = 'Find word in Files' })
 
     vim.keymap.set('n', '<leader>fW', function()
       builtin.live_grep {
@@ -119,7 +129,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
           return vim.list_extend(args, { '--hidden', '--no-ignore' })
         end,
       }
-    end, { desc = '[F]ind [W]ord in All Files' })
+    end, { desc = 'Find Word in All Files' })
 
     -- Shortcut for searching your Neovim configuration files
     vim.keymap.set('n', '<leader>fn', function()

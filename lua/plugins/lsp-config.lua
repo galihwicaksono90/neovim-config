@@ -170,46 +170,51 @@ return { -- LSP Configuration & Plugins
       -- But for many setups, the LSP (`tsserver`) will work just fine
       -- tsserver = {},
       --
-      volar = {
+      tsserver = {
         init_options = {
-          vue = {
-            hybridMode = false,
-          },
           plugins = {
             {
               name = '@vue/typescript-plugin',
               location = vue_language_server_path,
-              languages = { 'vue' },
+              languages = { 'javascript', 'typescript', 'vue' },
             },
           },
         },
-        -- settings = {
-        --   typescript = {
-        --     updateImportsOnFileMove = { enabled = 'always' },
-        --     inlayHints = {
-        --       parameterNames = { enabled = 'all' },
-        --       parameterTypes = { enabled = true },
-        --       variableTypes = { enabled = true },
-        --       propertyDeclarationTypes = { enabled = true },
-        --       functionLikeReturnTypes = { enabled = true },
-        --       enumMemberValues = { enabled = true },
-        --     },
-        --   },
-        --   javascript = {
-        --     updateImportsOnFileMove = { enabled = 'always' },
-        --     inlayHints = {
-        --       parameterNames = { enabled = 'literals' },
-        --       parameterTypes = { enabled = true },
-        --       variableTypes = { enabled = true },
-        --       propertyDeclarationTypes = { enabled = true },
-        --       functionLikeReturnTypes = { enabled = true },
-        --       enumMemberValues = { enabled = true },
-        --     },
-        --   },
-        -- },
-        filetypes = { 'vue' },
+        settings = {
+          typescript = {
+            updateImportsOnFileMove = { enabled = 'always' },
+            inlayHints = {
+              parameterNames = { enabled = 'all' },
+              parameterTypes = { enabled = true },
+              variableTypes = { enabled = true },
+              propertyDeclarationTypes = { enabled = true },
+              functionLikeReturnTypes = { enabled = true },
+              enumMemberValues = { enabled = true },
+            },
+          },
+          javascript = {
+            updateImportsOnFileMove = { enabled = 'always' },
+            inlayHints = {
+              parameterNames = { enabled = 'literals' },
+              parameterTypes = { enabled = true },
+              variableTypes = { enabled = true },
+              propertyDeclarationTypes = { enabled = true },
+              functionLikeReturnTypes = { enabled = true },
+              enumMemberValues = { enabled = true },
+            },
+          },
+        },
+        filetypes = {
+          'javascript',
+          'javascriptreact',
+          'javascript.jsx',
+          'typescript',
+          'typescriptreact',
+          'typescript.tsx',
+          'vue',
+        },
       },
-
+      volar = { {} },
       lua_ls = {
         -- cmd = {...},
         -- filetypes = { ...},
@@ -252,6 +257,7 @@ return { -- LSP Configuration & Plugins
           --
           server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
           require('lspconfig')[server_name].setup(server)
+          require('lspconfig').volar.setup {}
         end,
       },
     }

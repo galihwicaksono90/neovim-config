@@ -1,6 +1,3 @@
-if true then
-  return {}
-end
 return {
   -- dir = '~/Documents/plugins/codestats.nvim/',
   'galihwicaksono90/codestats.nvim',
