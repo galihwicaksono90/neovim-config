@@ -25,7 +25,7 @@ vim.opt.showmode = false
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.opt.clipboard = 'unnamedplus'
+-- vim.opt.clipboard = 'unnamedplus'
 
 -- Enable break indent
 vim.opt.breakindent = true
@@ -97,9 +97,26 @@ vim.opt.cmdheight = 1
 -- set colorscheme
 vim.cmd.colorscheme 'gruvbox-material'
 
--- set diagnostic icons
-local signs = { Error = '󰅚 ', Warn = '󰀪 ', Hint = '󰌶 ', Info = ' ' }
-for type, icon in pairs(signs) do
-  local hl = 'DiagnosticSign' .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
+-- -- set diagnostic icons
+-- local signs = { Error = '󰅚 ', Warn = '󰀪 ', Hint = '󰌶 ', Info = ' ' }
+-- for type, icon in pairs(signs) do
+--   local hl = 'DiagnosticSign' .. type
+--   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+-- end
+
+vim.diagnostic.config {
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = ' ',
+      [vim.diagnostic.severity.WARN] = ' ',
+      [vim.diagnostic.severity.INFO] = ' ',
+      [vim.diagnostic.severity.HINT] = '󰠠 ',
+    },
+    -- linehl = {
+    --   [vim.diagnostic.severity.ERROR] = 'Error',
+    --   [vim.diagnostic.severity.WARN] = 'Warn',
+    --   [vim.diagnostic.severity.INFO] = 'Info',
+    --   [vim.diagnostic.severity.HINT] = 'Hint',
+    -- },
+  },
+}

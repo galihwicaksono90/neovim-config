@@ -1,3 +1,7 @@
+if true then
+  return {}
+end
+
 local WorkDir = {
   provider = function()
     local icon = (vim.fn.haslocaldir(0) == 1 and 'l' or 'g') .. ' ' .. ' '

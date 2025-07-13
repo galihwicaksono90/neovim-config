@@ -34,13 +34,16 @@ vim.keymap.set('n', 'J', 'mzJ`z')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set('n', 'n', 'nzzzv')
 vim.keymap.set('n', 'N', 'Nzzzv')
-vim.keymap.set('n', '<leader>y', [["+y]], { desc = 'which_key_ignore' })
-vim.keymap.set('n', '<leader>Y', [["+Y]], { desc = 'which_key_ignore' })
+vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]], { desc = 'which_key_ignore' })
+vim.keymap.set({ 'n', 'v' }, '<leader>Y', [["+Y]], { desc = 'which_key_ignore' })
 vim.keymap.set('n', '<leader>d', [[" d]], { desc = 'which_key_ignore' })
 
-vim.keymap.set('v', '<leader>y', [["+y]], { desc = 'which_key_ignore' })
-
 vim.keymap.set('x', '<leader>p', [["_dP]], { desc = 'which_key_ignore' })
+
+-- next greatest remap ever : asbjornHaland
+vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]])
+vim.keymap.set('n', '<leader>Y', [["+Y]])
+vim.keymap.set({ 'n', 'v' }, '<leader>P', [["+p]])
 
 -- -- Exit terminal mode in tse builtin terminal with a shortcut that is a bit easier
 -- -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -48,4 +51,4 @@ vim.keymap.set('x', '<leader>p', [["_dP]], { desc = 'which_key_ignore' })
 -- --
 -- -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- -- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+--  vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
