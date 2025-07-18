@@ -10,7 +10,18 @@ return {
   lazy = false,
   config = function()
     require('oil').setup {
-      vim.keymap.set('n', '<leader>to', '<Cmd>Oil<CR>', { desc = 'Oil' }),
+      vim.keymap.set('n', '<leader>e', '<Cmd>Oil<CR>', { desc = 'Oil Nvim' }),
+      keymaps = {
+        ['<C-v>'] = { 'actions.select', opts = { vertical = true } },
+        ['<C-r>'] = 'actions.refresh',
+        ['<C-h>'] = false,
+        ['<C-l>'] = false,
+      },
+      columns = {
+        'icon',
+        "size",
+        "mtime",
+      },
     }
   end,
 }

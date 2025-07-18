@@ -62,10 +62,15 @@ function M.close_all(keep_current, force)
     keep_current = false
   end
   local current = vim.api.nvim_get_current_buf()
-  for _, bufnr in ipairs(vim.t.bufs) do
-    if not keep_current or bufnr ~= current then
-      M.close(bufnr, force)
+  -- Get all valid, listed buffers
+  local bufs = {}
+  for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+    if M.is_valid(bufnr) and (not keep_current or bufnr ~= current) then
+      table.insert(bufs, bufnr)
     end
+  end
+  for _, bufnr in ipairs(bufs) do
+    M.close(bufnr, force)
   end
 end
 

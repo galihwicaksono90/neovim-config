@@ -99,16 +99,16 @@ end
 ins_left {
   -- mode component
   function()
-    return ''
+    return ''
   end,
   color = function()
     -- auto change color according to neovims mode
     local mode_color = {
-      n = colors.red,
+      n = colors.blue,
       i = colors.green,
-      v = colors.blue,
+      v = colors.cyan,
       [''] = colors.blue,
-      V = colors.blue,
+      V = colors.cyan,
       c = colors.magenta,
       no = colors.red,
       s = colors.orange,
@@ -127,7 +127,7 @@ ins_left {
     }
     return { fg = mode_color[vim.fn.mode()] }
   end,
-  padding = { right = 1 },
+  padding = { right = 1, left = 1 },
 }
 
 ins_left {
@@ -261,4 +261,3 @@ return {
     lualine.setup(config)
   end,
 }
-

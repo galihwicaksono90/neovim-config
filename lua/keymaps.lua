@@ -45,6 +45,28 @@ vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]])
 vim.keymap.set('n', '<leader>Y', [["+Y]])
 vim.keymap.set({ 'n', 'v' }, '<leader>P', [["+p]])
 
+vim.keymap.set('n', '<leader>bp', function()
+  local path = vim.api.nvim_buf_get_name(0)
+  if path ~= '' then
+    vim.fn.setreg('+', path)
+    vim.notify('Copied buffer path to clipboard:\n' .. path, vim.log.levels.INFO)
+  else
+    vim.notify('No file path for current buffer', vim.log.levels.WARN)
+  end
+end, { desc = 'Copy buffer path to clipboard' })
+
+vim.keymap.set('n', '<leader>br', function()
+  local abs_path = vim.api.nvim_buf_get_name(0)
+  if abs_path ~= '' then
+    local cwd = vim.fn.getcwd()
+    local rel_path = vim.fn.fnamemodify(abs_path, ':~:.')
+    vim.fn.setreg('+', rel_path)
+    vim.notify('Copied buffer relative path to clipboard:\n' .. rel_path, vim.log.levels.INFO)
+  else
+    vim.notify('No file path for current buffer', vim.log.levels.WARN)
+  end
+end, { desc = 'Copy buffer relative path to clipboard' })
+
 -- -- Exit terminal mode in tse builtin terminal with a shortcut that is a bit easier
 -- -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- -- is not what someone will guess without a bit more experience.

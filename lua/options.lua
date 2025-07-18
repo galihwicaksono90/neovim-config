@@ -96,6 +96,9 @@ vim.opt.cmdheight = 1
 
 -- set colorscheme
 vim.cmd.colorscheme 'gruvbox-material'
+vim.api.nvim_set_hl(0, 'TelescopePromptTitle', { fg = '#282828', bg = '#7daea3', bold = true })
+vim.api.nvim_set_hl(0, 'TelescopePreviewTitle', { fg = '#282828', bg = '#fabd2f', bold = true })
+vim.api.nvim_set_hl(0, 'TelescopeResultsTitle', { fg = '#282828', bg = '#a9b665', bold = true })
 
 -- -- set diagnostic icons
 -- local signs = { Error = '󰅚 ', Warn = '󰀪 ', Hint = '󰌶 ', Info = ' ' }

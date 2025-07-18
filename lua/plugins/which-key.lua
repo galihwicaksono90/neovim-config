@@ -44,47 +44,18 @@ return { -- Useful plugin to show you pending keybinds.
 
     -- Document existing key chains
     spec = {
-      { '<leader>s', group = '[S]earch' },
-      { '<leader>b', group = '[B]uffers' },
-      { '<leader>t', group = '[T]oggle' },
-      { '<leader>f', group = '[F]ind' },
-      { '<leader>g', group = '[G]it' },
-      { '<leader>l', group = '[L]SP' },
-      { '<leader>m', group = '[M]Harpoon' },
-      { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+      { '<leader>a', group = '[A]i', icon = '' },
+      { '<leader>b', group = '[B]uffers', icon = '' },
+      { '<leader>t', group = '[T]oggle', icon = '' },
+      { '<leader>f', group = '[F]ind', icon = '', mode = { 'n', 'v' }},
+      { '<leader>g', group = '[G]it', icon = '' },
+      { '<leader>l', group = '[L]SP', icon = '' },
+      { '<leader>m', group = '[M]Harpoon', icon = '󱡅' },
+      { '<leader>e', icon = '󰼙' },
+      { '<leader>y', hidden = true},
+      { '<leader>Y', hidden = true},
+      { '<leader>P', hidden = true},
+      { '<leader><leader>', hidden = true},
     },
   },
 }
---
--- return { -- Useful plugin to show you pending keybinds.
---   'folke/which-key.nvim',
---   event = 'VimEnter', -- Sets the loading event to 'VimEnter'
---   config = function() -- This is the function that runs, AFTER loading
---     require('which-key').setup()
---
---     -- Document existing key chains
---     require('which-key').register {
---       -- ['<leader>b'] = { name = '[B]uffer', _ = 'which_key_ignore' },
---       -- ['<leader>f'] = { name = '[F]ind', _ = 'which_key_ignore' },
---       -- ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
---       -- ['<leader>l'] = { name = '[L]sp', _ = 'which_key_ignore' },
---       -- ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
---       { '<leader>b', group = '[B]uffer' },
---       { '<leader>b_', hidden = true },
---       { '<leader>f', group = '[F]ind' },
---       { '<leader>f_', hidden = true },
---       { '<leader>g', group = '[G]it' },
---       { '<leader>g_', hidden = true },
---       { '<leader>l', group = '[L]sp' },
---       { '<leader>l_', hidden = true },
---       { '<leader>t', group = '[T]oggle' },
---       { '<leader>t_', hidden = true },
---       { '<leader>h', desc = 'Git [H]unk', mode = 'v' },
---     }
---     -- visual mode
---     -- require('which-key').register({
---     --   ['<leader>h'] = { 'Git [H]unk' },
---     -- }, { mode = 'v' })
---     require 'which-key'
---   end,
--- }

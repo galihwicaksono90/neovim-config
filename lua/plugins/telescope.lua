@@ -17,7 +17,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
         return vim.fn.executable 'make' == 1
       end,
     },
-    { 'nvim-telescope/telescope-ui-select.nvim' },
+    -- { 'nvim-telescope/telescope-ui-select.nvim' },
 
     -- Useful for getting pretty icons, but requires a Nerd Font.
     { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
@@ -53,10 +53,15 @@ return { -- Fuzzy Finder (files, lsp, etc)
       --
       defaults = {
         borderchars = {
-          prompt = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
-          results = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
-          preview = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
+          prompt = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
+          results = { '─', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
+          preview = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
         },
+        -- borderchars = {
+        --   prompt = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
+        --   results = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
+        --   preview = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
+        -- },
         path_display = { 'truncate' },
         sorting_strategy = 'ascending',
         layout_config = {
@@ -70,10 +75,6 @@ return { -- Fuzzy Finder (files, lsp, etc)
           n = { q = actions.close },
           i = {
             ['<c-enter>'] = 'to_fuzzy_refine',
-            -- ['<C-N>'] = actions.cycle_history_next,
-            -- ['<C-P>'] = actions.cycle_history_prev,
-            -- ['<C-J>'] = actions.move_selection_next,
-            -- ['<C-K>'] = actions.move_selection_previous,
             ['<C-J>'] = actions.cycle_history_next,
             ['<C-K>'] = actions.cycle_history_prev,
             ['<C-N>'] = actions.move_selection_next,
@@ -83,7 +84,15 @@ return { -- Fuzzy Finder (files, lsp, etc)
       },
       extensions = {
         ['ui-select'] = {
-          require('telescope.themes').get_dropdown(),
+          require('telescope.themes').get_dropdown {
+            winblend = 0,
+            previewer = false,
+            borderchars = {
+              prompt = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
+              results = { '─', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
+              preview = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
+            },
+          },
         },
       },
     }
@@ -106,11 +115,11 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = 'Resume' })
     vim.keymap.set('n', '<leader>fo', builtin.oldfiles, { desc = 'Recent Files ("." for repeat)' })
     vim.keymap.set('n', '<leader><leader>', function()
-      builtin.buffers { sorting_mru = true, ignore_current_buffer = true }
+      builtin.buffers { sorting_mru = true }
     end, { desc = 'Find existing buffers' })
 
     vim.keymap.set('n', '<leader>f.', function()
-      builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+      builtin.current_buffer_fuzzy_find(require('telescope.themes').get_ivy {
         winblend = 0,
         previewer = false,
       })
@@ -125,8 +134,8 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set('n', '<leader>fW', function()
       builtin.live_grep {
         prompt_title = 'Live Grep in All Files',
-        additional_args = function(args)
-          return vim.list_extend(args, { '--hidden', '--no-ignore' })
+        additional_args = function()
+          return { '--hidden', '--no-ignore' }
         end,
       }
     end, { desc = 'Find Word in All Files' })
@@ -135,5 +144,6 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set('n', '<leader>fn', function()
       builtin.find_files { cwd = vim.fn.stdpath 'config' }
     end, { desc = 'Neovim files' })
+
   end,
 }

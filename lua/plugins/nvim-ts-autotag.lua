@@ -1,7 +1,3 @@
-if true then
-  return {}
-end
-
 return { 'windwp/nvim-ts-autotag',
   config = function()
     require('nvim-ts-autotag').setup {
